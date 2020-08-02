@@ -45,6 +45,5 @@ public class PlayerInput
         movement.x = Input.GetAxis("Horizontal");
         jump = Input.GetButton("Jump");
         rewindState = Input.GetButtonDown("Rewind");
-        Debug.Log(rewindState);
     }
 }

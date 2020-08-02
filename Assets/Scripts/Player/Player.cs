@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D), typeof(CharacterController2D))]
+[RequireComponent(typeof(SpriteRenderer), typeof(CharacterController2D))]
 public class Player : MonoBehaviour
 {
     //dependacies
@@ -55,7 +55,10 @@ public class Player : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameEventSystem.Current.UnregisterListener<ColorChangerPlayerPushColorInfo>(colorSwapPushHandler);
+        if (GameEventSystem.Current != null)
+        {
+            GameEventSystem.Current.UnregisterListener<ColorChangerPlayerPushColorInfo>(colorSwapPushHandler);
+        }
     }
 
     private void Start()

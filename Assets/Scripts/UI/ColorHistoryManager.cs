@@ -1,27 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.UI;
 
 public class ColorHistoryManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject colorHistorySquarePrefab;
+    [SerializeField]
+    private Vector2 marginSize;
+    [SerializeField]
+    private Vector2 squareSize;
 
     private Stack<GameObject> colorHistoryObjects;
+    private RectTransform parent;
+
 
     // Start is called before the first frame update
-    private void Awake()
+    private void OnEnable()
     {
         colorHistoryObjects = new Stack<GameObject>();
+        parent = GetComponent<RectTransform>();
         GameEventSystem.Current.RegisterListener<PlayerPopColorInfo>(popHandler);
         GameEventSystem.Current.RegisterListener<PlayerPushColorInfo>(pushHandler);
     }
 
     private void OnDestroy()
     {
-        GameEventSystem.Current.UnregisterListener<PlayerPopColorInfo>(popHandler);
-        GameEventSystem.Current.UnregisterListener<PlayerPushColorInfo>(pushHandler);
+        if (GameEventSystem.Current != null)
+        {
+            GameEventSystem.Current.UnregisterListener<PlayerPopColorInfo>(popHandler);
+            GameEventSystem.Current.UnregisterListener<PlayerPushColorInfo>(pushHandler);
+        }
     }
 
     public void popHandler(PlayerPopColorInfo info)
@@ -36,7 +45,7 @@ public class ColorHistoryManager : MonoBehaviour
         RectTransform rectTransform = toAdd.GetComponent<RectTransform>();
         UnityEngine.UI.Image image = toAdd.GetComponent<UnityEngine.UI.Image>();
         image.color = GameConstants.Current.ColorList.colors[info.Color];
-        rectTransform.position = new Vector3(10 + (colorHistoryObjects.Count * 15), 10, 0);
+        rectTransform.position = new Vector2((marginSize.x + squareSize.x/2) + (colorHistoryObjects.Count * squareSize.x + marginSize.x * colorHistoryObjects.Count), squareSize.y/2 + marginSize.y);
         colorHistoryObjects.Push(toAdd);
     }
 }

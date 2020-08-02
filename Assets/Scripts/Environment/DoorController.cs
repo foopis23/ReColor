@@ -2,16 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
+
 public class DoorController : MonoBehaviour
 {
     [SerializeField]
     private int colorID;
 
+    [SerializeField]
+    private Sprite doorClose;
+
+    [SerializeField]
+    private Sprite doorOpen;
+
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
 
-    private void Awake()
+    private void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -25,11 +31,12 @@ public class DoorController : MonoBehaviour
             GameEventSystem.Current.RegisterListener<PlayerPopColorInfo>(popHandle);
             GameEventSystem.Current.RegisterListener<PlayerPushColorInfo>(pushHandle);
         }
+
     }
 
     private void OnDestroy()
     {
-        if (Application.isPlaying)
+        if (Application.isPlaying && GameEventSystem.Current != null)
         {
             GameEventSystem.Current.UnregisterListener<PlayerPopColorInfo>(popHandle);
             GameEventSystem.Current.UnregisterListener<PlayerPushColorInfo>(pushHandle);
@@ -40,10 +47,12 @@ public class DoorController : MonoBehaviour
     {
         if (info.Color == colorID)
         {
+            spriteRenderer.sprite = doorOpen;
             boxCollider.enabled = false;
         }
         else
         {
+            spriteRenderer.sprite = doorClose;
             boxCollider.enabled = true;
         }
     }
@@ -52,10 +61,12 @@ public class DoorController : MonoBehaviour
     {
         if (info.Color == colorID)
         {
+            spriteRenderer.sprite = doorOpen;
             boxCollider.enabled = false;
         }
         else
         {
+            spriteRenderer.sprite = doorClose;
             boxCollider.enabled = true;
         }
     }
