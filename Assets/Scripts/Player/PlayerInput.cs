@@ -6,6 +6,7 @@ public class PlayerInput
 {
     private Vector2 movement;
     private bool jump;
+    private bool rewindState;
 
     //normalized vector
     public Vector2 Movement
@@ -24,6 +25,14 @@ public class PlayerInput
         }
     }
 
+    public bool RewindState
+    {
+        get
+        {
+            return this.rewindState;
+        }
+    }
+
 
     public PlayerInput()
     {
@@ -33,7 +42,9 @@ public class PlayerInput
 
     public void Update()
     {
-        this.movement.x = Input.GetAxis("Horizontal");
+        movement.x = Input.GetAxis("Horizontal");
         jump = Input.GetButton("Jump");
+        rewindState = Input.GetButtonDown("Rewind");
+        Debug.Log(rewindState);
     }
 }
