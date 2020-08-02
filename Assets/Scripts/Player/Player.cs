@@ -23,6 +23,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Stack<int> colorHistory;
 
+    private Vector2 movement;
+    private bool jump;
+    private bool rewind;
+
     //public getters
     public int ColorID
     {
@@ -47,7 +51,6 @@ public class Player : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         characterController = GetComponent<CharacterController2D>();
-        playerInput = new PlayerInput();
         colorHistory = new Stack<int>();
 
         GameEventSystem.Current.RegisterListener<ColorChangerPlayerPushColorInfo>(colorSwapPushHandler);
@@ -68,15 +71,20 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        playerInput.Update();
+        movement.x = Input.GetAxis("Horizontal");
+        if (Input.GetButtonDown("Jump"))
+            jump = true;
 
-        if (playerInput.RewindState)
+        rewind = Input.GetButtonDown("Rewind");
+
+        if (rewind)
             popColor();
     }
 
     private void FixedUpdate()
     {
-        characterController.Move(playerInput.Movement.x * movementSpeed * Time.fixedDeltaTime, false, playerInput.Jump);
+        characterController.Move(movement.x * movementSpeed * Time.fixedDeltaTime, false, jump);
+        jump = false;
     }
 
     public void colorSwapPushHandler(ColorChangerPlayerPushColorInfo info)

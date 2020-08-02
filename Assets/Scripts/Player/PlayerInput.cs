@@ -42,8 +42,6 @@ public class PlayerInput
 
     public void Update()
     {
-        movement.x = Input.GetAxis("Horizontal");
-        jump = Input.GetButton("Jump");
-        rewindState = Input.GetButtonDown("Rewind");
+
     }
 }
