@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer), typeof(CharacterController2D))]
+
 public class Player : MonoBehaviour
 {
     //dependacies
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         {
             if (this.colorHistory.Count > 1)
                 return this.colorHistory.Peek();
-            
+
             return 0;
         }
     }
@@ -49,8 +49,8 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        sr = GetComponent<SpriteRenderer>();
         characterController = GetComponent<CharacterController2D>();
+        sr = GetComponent<SpriteRenderer>();
         colorHistory = new Stack<int>();
 
         GameEventSystem.Current.RegisterListener<ColorChangerPlayerPushColorInfo>(colorSwapPushHandler);
