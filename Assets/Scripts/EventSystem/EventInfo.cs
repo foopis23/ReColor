@@ -45,6 +45,42 @@ public class ColorChangerPlayerPushColorInfo : EventInfo
     }
 }
 
+public class PlayerEnterColorLaser : EventInfo
+{
+    public Player Target;
+    public ColorLaserController Src;
+
+    public PlayerEnterColorLaser(Player target, ColorLaserController src)
+    {
+        Target = target;
+        Src = src;
+    }
+}
+
+public class PlayerExitColorLaser : EventInfo
+{
+    public Player Target;
+    public ColorLaserController Src;
+
+    public PlayerExitColorLaser(Player target, ColorLaserController src)
+    {
+
+    }
+}
+
+public class PlayerInteractWithColorLaser : EventInfo
+{
+    public Player Src;
+    public ColorLaserController Target;
+
+    public PlayerInteractWithColorLaser(Player src, ColorLaserController target)
+    {
+        Src = src;
+        Target = target;
+
+    }
+}
+
 public class EndLevelInfo : EventInfo
 {
     public Player Ender;

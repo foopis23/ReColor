@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3029920530538436054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00052, y: 0.0814, z: -1}
-  m_LocalScale: {x: 1.2500193, y: 0.4139258, z: 1}
+  m_LocalPosition: {x: -0.00052, y: 0.0814, z: -2}
+  m_LocalScale: {x: 1.75, y: 0.4139258, z: 1}
   m_Children: []
   m_Father: {fileID: 3029920530874460925}
   m_RootOrder: 0
@@ -201,7 +201,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 2, y: 1}
+  m_Size: {x: 2.5, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -220,18 +220,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.8125037, y: 0.12678456}
+  m_Offset: {x: 1.0620198, y: 0.123585165}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.375, y: 0.375, z: 0.375, w: 0.125}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 1}
-    newSize: {x: 2, y: 1}
+    newSize: {x: 2.5, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.37518668, y: 0.50681543}
+  m_Size: {x: 0.37437153, y: 0.50041664}
   m_EdgeRadius: 0
 --- !u!61 &3029920530874460898
 BoxCollider2D:
@@ -246,18 +246,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.8128375, y: 0.12139635}
+  m_Offset: {x: -1.0621805, y: 0.122882575}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.375, y: 0.375, z: 0.375, w: 0.125}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 1}
-    newSize: {x: 2, y: 1}
+    newSize: {x: 2.5, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.37403846, y: 0.5025449}
+  m_Size: {x: 0.3750782, y: 0.5055173}
   m_EdgeRadius: 0
 --- !u!61 &3029920530874460899
 BoxCollider2D:
@@ -272,16 +272,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0003838539, y: -0.312788}
+  m_Offset: {x: -0.0009050369, y: -0.312788}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.375, y: 0.375, z: 0.375, w: 0.125}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 1}
-    newSize: {x: 2, y: 1}
+    newSize: {x: 2.5, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.9992561, y: 0.3746568}
+  m_Size: {x: 2.497776, y: 0.3746568}
   m_EdgeRadius: 0

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class GameConstants : MonoBehaviour
 {
     private static GameConstants current;

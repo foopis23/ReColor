@@ -26,6 +26,9 @@ public class Player : MonoBehaviour
     private Vector2 movement;
     private bool jump;
     private bool rewind;
+    private bool interact;
+
+    private ColorLaserController interactable;
 
     //public getters
     public int ColorID
@@ -54,6 +57,8 @@ public class Player : MonoBehaviour
         colorHistory = new Stack<int>();
 
         GameEventSystem.Current.RegisterListener<ColorChangerPlayerPushColorInfo>(colorSwapPushHandler);
+        GameEventSystem.Current.RegisterListener<PlayerEnterColorLaser>(EnterLaserHandler);
+        GameEventSystem.Current.RegisterListener<PlayerExitColorLaser>(ExitLaserHandler);
     }
 
     private void OnDestroy()
@@ -61,6 +66,8 @@ public class Player : MonoBehaviour
         if (GameEventSystem.Current != null)
         {
             GameEventSystem.Current.UnregisterListener<ColorChangerPlayerPushColorInfo>(colorSwapPushHandler);
+            GameEventSystem.Current.UnregisterListener<PlayerEnterColorLaser>(EnterLaserHandler);
+            GameEventSystem.Current.UnregisterListener<PlayerExitColorLaser>(ExitLaserHandler);
         }
     }
 
@@ -76,9 +83,17 @@ public class Player : MonoBehaviour
             jump = true;
 
         rewind = Input.GetButtonDown("Rewind");
+        interact = Input.GetButtonDown("Interact");
 
         if (rewind)
             popColor();
+
+        if (interact && interactable != false)
+        {
+            Debug.Log("test 3");
+            GameEventSystem.Current.FireEvent(new PlayerInteractWithColorLaser(this, interactable));
+            interactable = null;
+        }
     }
 
     private void FixedUpdate()
@@ -92,6 +107,24 @@ public class Player : MonoBehaviour
         if (info.Target == this)
         {
             pushColor(info.Color);
+        }
+    }
+
+    public void EnterLaserHandler(PlayerEnterColorLaser info)
+    {
+        Debug.Log("test 1");
+        if (info.Src.Color != colorHistory.Peek())
+        {
+            Debug.Log("test 2");
+            interactable = info.Src;
+        }
+    }
+
+    public void ExitLaserHandler(PlayerExitColorLaser info)
+    {
+        if (info.Src == interactable)
+        {
+            interactable = null;
         }
     }
 

@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameEventSystem : MonoBehaviour
 {
     // Use this for initialization
-    void OnEnable()
+    private void Awake()
     {
         __Current = this;
     }
