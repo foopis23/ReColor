@@ -24,6 +24,16 @@ public class GameConstants : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private int[] levelPars;
+    public int[] LevelPars
+    {
+        get
+        {
+            return this.levelPars;
+        }
+    }
+
 
     private void Awake()
     {

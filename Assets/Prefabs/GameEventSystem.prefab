@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorList: {fileID: 11400000, guid: 1d8526bcb101f1945874384b79389286, type: 2}
+  levelPars: 
 --- !u!114 &175675839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,3 +72,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorList: {fileID: 11400000, guid: 1d8526bcb101f1945874384b79389286, type: 2}
+  levelPars: 0600000001000000

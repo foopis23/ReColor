@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
 
     public int popColor()
     {
-        if (colorHistory.Count > 0)
+        if (colorHistory.Count > 1)
         {
             int color = colorHistory.Pop();
             int currentColor = colorHistory.Peek();

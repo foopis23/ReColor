@@ -44,3 +44,15 @@ public class ColorChangerPlayerPushColorInfo : EventInfo
         Color = color;
     }
 }
+
+public class EndLevelInfo : EventInfo
+{
+    public Player Ender;
+    public int GoToScene;
+
+    public EndLevelInfo(Player ender, int goToScene=-1)
+    {
+        Ender = ender;
+        GoToScene = goToScene;
+    }
+}

@@ -121,7 +121,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.95, y: 0.95}
   m_EdgeRadius: 0
 --- !u!50 &2490685968268825026
 Rigidbody2D:
@@ -156,8 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a91ae6396e2e340adac99d47ccf14a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 1350
-  m_CrouchSpeed: 0.4
+  m_JumpForce: 1650
+  m_CrouchSpeed: 1
   m_MovementSmoothing: 0
   m_AirControl: 1
   m_WhatIsGround:
