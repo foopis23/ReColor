@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 3029920530538436052}
   - component: {fileID: 3029920530538436059}
   - component: {fileID: 3029920530538436058}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: ColorChanger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &3029920530538436053
 Transform:
@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3029920530538436054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 1.8098439, y: 0.8, z: 1}
+  m_LocalPosition: {x: -0.00052, y: 0.0814, z: -1}
+  m_LocalScale: {x: 1.2500193, y: 0.4139258, z: 1}
   m_Children: []
   m_Father: {fileID: 3029920530874460925}
   m_RootOrder: 0
@@ -87,7 +87,6 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -136,12 +135,12 @@ GameObject:
   - component: {fileID: 3029920530874460924}
   - component: {fileID: 3029920530874460898}
   - component: {fileID: 3029920530874460899}
-  m_Layer: 24
+  m_Layer: 0
   m_Name: Color Vat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &3029920530874460925
 Transform:
@@ -151,7 +150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3029920530874460927}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: 1}
+  m_LocalPosition: {x: -3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3029920530538436053}
@@ -173,7 +172,6 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -222,18 +220,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.94997084, y: 0.04961002}
+  m_Offset: {x: 0.8125037, y: 0.12678456}
   m_SpriteTilingProperty:
-    border: {x: 0.099999994, y: 0.099999994, z: 0.099999994, w: 0}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.2, y: 1.1}
+    oldSize: {x: 2, y: 1}
     newSize: {x: 2, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.10025239, y: 0.8975117}
+  m_Size: {x: 0.37518668, y: 0.50681543}
   m_EdgeRadius: 0
 --- !u!61 &3029920530874460898
 BoxCollider2D:
@@ -244,22 +242,22 @@ BoxCollider2D:
   m_GameObject: {fileID: 3029920530874460927}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 23a6a216a38fb554284c88dff6679e1e, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.9490988, y: 0.04909876}
+  m_Offset: {x: -0.8128375, y: 0.12139635}
   m_SpriteTilingProperty:
-    border: {x: 0.099999994, y: 0.099999994, z: 0.099999994, w: 0}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.2, y: 1.1}
+    oldSize: {x: 2, y: 1}
     newSize: {x: 2, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.10151577, y: 0.8979574}
+  m_Size: {x: 0.37403846, y: 0.5025449}
   m_EdgeRadius: 0
 --- !u!61 &3029920530874460899
 BoxCollider2D:
@@ -270,20 +268,20 @@ BoxCollider2D:
   m_GameObject: {fileID: 3029920530874460927}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 23a6a216a38fb554284c88dff6679e1e, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0003838539, y: -0.45008564}
+  m_Offset: {x: -0.0003838539, y: -0.312788}
   m_SpriteTilingProperty:
-    border: {x: 0.099999994, y: 0.099999994, z: 0.099999994, w: 0}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.2, y: 1.1}
+    oldSize: {x: 2, y: 1}
     newSize: {x: 2, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.9992561, y: 0.100061536}
+  m_Size: {x: 1.9992561, y: 0.3746568}
   m_EdgeRadius: 0

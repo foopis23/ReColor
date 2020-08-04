@@ -61,8 +61,6 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -88,7 +86,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 592410879ef9ddf4ba80654ea585d374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorHistorySquarePrefab: {fileID: 6817122615471285523, guid: 843743c8c0598f04bb7234ff02e1f7bd, type: 3}
+  colorHistorySquarePrefab: {fileID: 6817122615471285523, guid: 843743c8c0598f04bb7234ff02e1f7bd,
+    type: 3}
   marginSize: {x: 10, y: 10}
   squareSize: {x: 25, y: 25}
 --- !u!1 &7319875287744436239
