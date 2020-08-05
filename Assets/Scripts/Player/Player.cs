@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     //components
     private SpriteRenderer sr;
+    private CanvasGroup interactionDialogue;
 
     //properties
     [SerializeField]
@@ -55,6 +56,8 @@ public class Player : MonoBehaviour
         characterController = GetComponent<CharacterController2D>();
         sr = GetComponent<SpriteRenderer>();
         colorHistory = new Stack<int>();
+        interactionDialogue = GetComponentInChildren<CanvasGroup>();
+
 
         GameEventSystem.Current.RegisterListener<ColorChangerPlayerPushColorInfo>(colorSwapPushHandler);
         GameEventSystem.Current.RegisterListener<PlayerEnterColorLaser>(EnterLaserHandler);
@@ -88,11 +91,26 @@ public class Player : MonoBehaviour
         if (rewind)
             popColor();
 
-        if (interact && interactable != false)
+        if (interactable != null)
         {
-            Debug.Log("test 3");
-            GameEventSystem.Current.FireEvent(new PlayerInteractWithColorLaser(this, interactable));
-            interactable = null;
+            interactionDialogue.alpha = 1;
+
+            if (interact)
+            {
+                GameEventSystem.Current.FireEvent(new PlayerInteractWithColorLaser(this, interactable));
+                interactable = null;
+            }
+
+        }
+        else
+        {
+            interactionDialogue.alpha = 0;
+        }
+
+        //TODO: Replace this with a real way to reset the level
+        if (Input.GetButtonDown("Reset"))
+        {
+            GameEventSystem.Current.FireEvent(new EndLevelInfo(this, SceneManager.GetActiveScene().buildIndex));
         }
     }
 
@@ -112,20 +130,15 @@ public class Player : MonoBehaviour
 
     public void EnterLaserHandler(PlayerEnterColorLaser info)
     {
-        Debug.Log("test 1");
         if (info.Src.Color != colorHistory.Peek())
         {
-            Debug.Log("test 2");
             interactable = info.Src;
         }
     }
 
     public void ExitLaserHandler(PlayerExitColorLaser info)
     {
-        if (info.Src == interactable)
-        {
-            interactable = null;
-        }
+        interactable = null;
     }
 
     public void pushColor(int colorID)
