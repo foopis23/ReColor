@@ -54,11 +54,11 @@ public class CharacterController2D : MonoBehaviour
 	{
         if (InvertGravity)
         {
-            m_Rigidbody2D.gravityScale = m_starting_gravity * -1;
+            m_Rigidbody2D.gravityScale = -1;
         }
         else
         {
-            m_Rigidbody2D.gravityScale = m_starting_gravity;
+            m_Rigidbody2D.gravityScale = 1;
         }
 
         
@@ -88,6 +88,8 @@ public class CharacterController2D : MonoBehaviour
 					OnLandEvent.Invoke();
 			}
 		}
+
+        DebugStuff.Current.Log(m_Rigidbody2D.velocity.ToString());
 	}
 
 

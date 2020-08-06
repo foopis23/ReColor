@@ -32,7 +32,6 @@ public class Player : MonoBehaviour
 
 
     private AudioSource audioSource;
-    private Rigidbody2D rigidbody2D;
 
     private Vector2 movement;
     private bool jump;
@@ -68,7 +67,6 @@ public class Player : MonoBehaviour
         colorHistory = new Stack<int>();
         interactionDialogue = GetComponentInChildren<CanvasGroup>();
         audioSource = GetComponent<AudioSource>();
-        rigidbody2D = GetComponent<Rigidbody2D>();
 
 
         GameEventSystem.Current.RegisterListener<ColorChangerPlayerPushColorInfo>(colorSwapPushHandler);
@@ -127,10 +125,11 @@ public class Player : MonoBehaviour
         {
             GameEventSystem.Current.FireEvent(new EndLevelInfo(this, SceneManager.GetActiveScene().buildIndex));
         }
+
+        characterController.InvertGravity = (ColorID == 4);
     }
 
     private void FixedUpdate() {
-        characterController.InvertGravity = ColorID == 4;
         characterController.Move(movement.x * movementSpeed * Time.fixedDeltaTime, false, jump);
         jump = false;
     }
