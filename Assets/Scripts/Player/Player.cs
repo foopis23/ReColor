@@ -24,6 +24,16 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Stack<int> colorHistory;
 
+    [SerializeField]
+    private AudioClip jumpClip;
+
+    [SerializeField]
+    private AudioClip landClip;
+
+
+    private AudioSource audioSource;
+    private Rigidbody2D rigidbody2D;
+
     private Vector2 movement;
     private bool jump;
     private bool rewind;
@@ -57,6 +67,8 @@ public class Player : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         colorHistory = new Stack<int>();
         interactionDialogue = GetComponentInChildren<CanvasGroup>();
+        audioSource = GetComponent<AudioSource>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
 
 
         GameEventSystem.Current.RegisterListener<ColorChangerPlayerPushColorInfo>(colorSwapPushHandler);
@@ -83,7 +95,10 @@ public class Player : MonoBehaviour
     {
         movement.x = Input.GetAxis("Horizontal");
         if (Input.GetButtonDown("Jump"))
+        {
             jump = true;
+        }
+
 
         rewind = Input.GetButtonDown("Rewind");
         interact = Input.GetButtonDown("Interact");
@@ -114,8 +129,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
+        characterController.InvertGravity = ColorID == 4;
         characterController.Move(movement.x * movementSpeed * Time.fixedDeltaTime, false, jump);
         jump = false;
     }
@@ -175,5 +190,17 @@ public class Player : MonoBehaviour
 
 
         return -1;
+    }
+
+    public void handleLanding()
+    {
+        audioSource.clip = landClip;
+        audioSource.Play();
+    }
+
+    public void handleJump()
+    {
+        audioSource.clip = jumpClip;
+        audioSource.Play();
     }
 }

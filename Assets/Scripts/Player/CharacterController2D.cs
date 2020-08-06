@@ -19,6 +19,9 @@ public class CharacterController2D : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;											// For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
+    private float m_starting_gravity;
+
+    public bool InvertGravity = false;
 
 	[Header("Events")]
 	[Space]
@@ -31,7 +34,9 @@ public class CharacterController2D : MonoBehaviour
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
 
-	private void Start()
+    public UnityEvent OnJumpEvent;
+
+    private void Start()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 
@@ -40,16 +45,40 @@ public class CharacterController2D : MonoBehaviour
 
 		if (OnCrouchEvent == null)
 			OnCrouchEvent = new BoolEvent();
-	}
 
-	private void FixedUpdate()
+        m_starting_gravity = m_Rigidbody2D.gravityScale;
+
+    }
+
+    private void FixedUpdate()
 	{
+        if (InvertGravity)
+        {
+            m_Rigidbody2D.gravityScale = m_starting_gravity * -1;
+        }
+        else
+        {
+            m_Rigidbody2D.gravityScale = m_starting_gravity;
+        }
+
+        
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
 
-		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+        // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
+        // This can be done using layers instead but Sample Assets will not overwrite your project settings.
+
+        Collider2D[] colliders;
+
+        if (InvertGravity)
+        {
+            colliders = Physics2D.OverlapCircleAll(m_CeilingCheck.position, k_GroundedRadius, m_WhatIsGround);
+        }
+        else
+        {
+            colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+        }
+
 		for (int i = 0; i < colliders.Length; i++)
 		{
 			if (colliders[i].gameObject != gameObject)
@@ -116,7 +145,17 @@ public class CharacterController2D : MonoBehaviour
 		{
 			// Add a vertical force to the player.
 			m_Grounded = false;
-			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+            if (InvertGravity)
+            {
+                m_Rigidbody2D.AddForce(new Vector2(0f, -m_JumpForce));
+            }
+            else
+            {
+                m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+            }
+
+
+            OnJumpEvent.Invoke();
 		}
 
         if (!m_Grounded && m_Rigidbody2D.velocity.y <= 0)

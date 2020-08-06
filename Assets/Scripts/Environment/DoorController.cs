@@ -17,14 +17,11 @@ public class DoorController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
 
-    private void Start()
+    private void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        ColorScriptableObject colorList = GameConstants.Current.ColorList;
-        Color color = colorList.colors[colorID];
-        spriteRenderer.color = color;
 
         if (Application.isPlaying)
         {
@@ -32,6 +29,13 @@ public class DoorController : MonoBehaviour
             GameEventSystem.Current.RegisterListener<PlayerPushColorInfo>(pushHandle);
         }
 
+    }
+
+    private void Start()
+    {
+        ColorScriptableObject colorList = GameConstants.Current.ColorList;
+        Color color = colorList.colors[colorID];
+        spriteRenderer.color = color;
     }
 
     private void OnDestroy()

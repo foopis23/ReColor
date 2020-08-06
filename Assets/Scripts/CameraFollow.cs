@@ -13,7 +13,7 @@ public class CameraFollow : MonoBehaviour
     private Vector3 offset;
 
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         if (follow != null)
         {
