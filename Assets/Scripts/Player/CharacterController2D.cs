@@ -21,6 +21,9 @@ public class CharacterController2D : MonoBehaviour
 	private Vector3 m_Velocity = Vector3.zero;
     private float m_starting_gravity;
 
+    [SerializeField]
+    private float negative_gravity = 100f;
+
     public bool InvertGravity = false;
 
 	[Header("Events")]
@@ -51,17 +54,7 @@ public class CharacterController2D : MonoBehaviour
     }
 
     private void FixedUpdate()
-	{
-        if (InvertGravity)
-        {
-            m_Rigidbody2D.gravityScale = -1;
-        }
-        else
-        {
-            m_Rigidbody2D.gravityScale = 1;
-        }
-
-        
+	{   
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
 
@@ -88,15 +81,13 @@ public class CharacterController2D : MonoBehaviour
 					OnLandEvent.Invoke();
 			}
 		}
-
-        DebugStuff.Current.Log(m_Rigidbody2D.velocity.ToString());
 	}
 
 
 	public void Move(float move, bool crouch, bool jump)
 	{
-		// If crouching, check to see if the character can stand up
-		if (!crouch)
+        // If crouching, check to see if the character can stand up
+        if (!crouch)
 		{
 			// If the character has a ceiling preventing them from standing up, keep them crouching
 			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
@@ -159,6 +150,11 @@ public class CharacterController2D : MonoBehaviour
 
             OnJumpEvent.Invoke();
 		}
+
+        if (InvertGravity)
+        {
+            m_Rigidbody2D.AddForce(new Vector2(0f, negative_gravity));
+        }
 
         if (!m_Grounded && m_Rigidbody2D.velocity.y <= 0)
         {
