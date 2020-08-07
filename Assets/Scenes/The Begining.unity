@@ -130,26 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1612689303, guid: 3e80171a2dd761a4fbf33b040533e7c4, type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1612689303, guid: 3e80171a2dd761a4fbf33b040533e7c4, type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1612689303, guid: 3e80171a2dd761a4fbf33b040533e7c4, type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1612689303, guid: 3e80171a2dd761a4fbf33b040533e7c4, type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1612689303, guid: 3e80171a2dd761a4fbf33b040533e7c4, type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7319875288447616849, guid: 3e80171a2dd761a4fbf33b040533e7c4, type: 3}
       propertyPath: m_Name
       value: HUD

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: The Fall
   ParScore: 8
+  historySize: 5

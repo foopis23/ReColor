@@ -7,4 +7,6 @@ public class LevelData : ScriptableObject
 {
     public string Name;
     public int ParScore;
+    [Min(1)]
+    public int historySize = 1;
 }

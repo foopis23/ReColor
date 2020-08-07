@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Hardcore Parkour
   ParScore: 1
+  historySize: 3

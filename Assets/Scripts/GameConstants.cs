@@ -1,17 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [ExecuteInEditMode]
 public class GameConstants : MonoBehaviour
 {
     private static GameConstants current;
 
+    public bool Paused = false;
+
     public static GameConstants Current
     {
         get
         {
-            return GameConstants.current;
+            return current;
         }
     }
 
@@ -21,23 +24,47 @@ public class GameConstants : MonoBehaviour
     {
         get
         {
-            return this.colorList;
+            return colorList;
         }
     }
 
     [SerializeField]
-    private int[] levelPars;
-    public int[] LevelPars
+    private LevelDataList levelDataList;
+    public LevelDataList LevelDataList
     {
         get
         {
-            return this.levelPars;
+            return levelDataList;
         }
     }
+
+   [SerializeField]
+   private int buildIndexOffset = 0;
+
+
+    public LevelData getLevelData(int buildIndex = -1)
+    {
+        int arrIndex;
+
+        if (buildIndex == -1)
+        {
+            arrIndex = SceneManager.GetActiveScene().buildIndex - buildIndexOffset;
+        }
+        else
+        {
+            arrIndex = buildIndex - buildIndexOffset;
+        }
+
+        if (levelDataList != null && levelDataList.levelDataList.Length > arrIndex && arrIndex > -1)
+            return levelDataList.levelDataList[arrIndex];
+
+        return null;
+    }
+    
 
 
     private void Awake()
     {
-        GameConstants.current = this;
+        current = this;
     }
 }

@@ -12,18 +12,18 @@ public class ScoreManager : MonoBehaviour
     {
         score = 0;
         text = GetComponent<TMP_Text>();
-        GameEventSystem.Current.RegisterListener<ColorChangerPlayerPushColorInfo>(ChangeColorHanlder);
+        GameEventSystem.Current.RegisterListener<PlayerPushColorInfo>(ChangeColorHanlder);
     }
 
     void OnDestroy()
     {
         if (GameEventSystem.Current != null)
         {
-            GameEventSystem.Current.UnregisterListener<ColorChangerPlayerPushColorInfo>(ChangeColorHanlder);
+            GameEventSystem.Current.UnregisterListener<PlayerPushColorInfo>(ChangeColorHanlder);
         }
     }
 
-    public void ChangeColorHanlder(ColorChangerPlayerPushColorInfo info)
+    public void ChangeColorHanlder(PlayerPushColorInfo info)
     {
         score += 1;
         text.text = "Score: " + score;

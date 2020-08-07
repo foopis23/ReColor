@@ -786,6 +786,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 175675839, guid: 427639afe97f05e498db897061cbcd8a, type: 3}
+      propertyPath: levelDataList
+      value: 
+      objectReference: {fileID: 11400000, guid: 92571c06f5f3a674eb73d2d3635df740, type: 2}
     - target: {fileID: 7128004085836980768, guid: 427639afe97f05e498db897061cbcd8a, type: 3}
       propertyPath: m_Name
       value: GameEventSystem
@@ -834,7 +838,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 175675839, guid: 427639afe97f05e498db897061cbcd8a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 427639afe97f05e498db897061cbcd8a, type: 3}
 --- !u!850595691 &918100879
 LightingSettings:
@@ -20897,6 +20902,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 869356698, guid: 3e80171a2dd761a4fbf33b040533e7c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1612689303, guid: 3e80171a2dd761a4fbf33b040533e7c4, type: 3}
       propertyPath: m_textInfo.characterCount
       value: 8

@@ -24,6 +24,9 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField]
     private float negative_gravity = 100f;
 
+    [SerializeField]
+    private float fast_fall_gravity = 2.0f;
+
     public bool InvertGravity = false;
 
 	[Header("Events")]
@@ -51,13 +54,11 @@ public class CharacterController2D : MonoBehaviour
 
         m_starting_gravity = m_Rigidbody2D.gravityScale;
 
+        m_Grounded = isGrounded();
     }
 
-    private void FixedUpdate()
-	{   
-		bool wasGrounded = m_Grounded;
-		m_Grounded = false;
-
+    private bool isGrounded()
+    {
         // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
         // This can be done using layers instead but Sample Assets will not overwrite your project settings.
 
@@ -72,16 +73,26 @@ public class CharacterController2D : MonoBehaviour
             colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
         }
 
-		for (int i = 0; i < colliders.Length; i++)
-		{
-			if (colliders[i].gameObject != gameObject)
-			{
-				m_Grounded = true;
-				if (!wasGrounded)
-					OnLandEvent.Invoke();
-			}
-		}
-	}
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].gameObject != gameObject)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void FixedUpdate()
+	{
+        bool wasGrounded = m_Grounded;
+        
+        m_Grounded = isGrounded();
+
+        if (m_Grounded && !wasGrounded)
+            OnLandEvent.Invoke();
+    }
 
 
 	public void Move(float move, bool crouch, bool jump)
@@ -140,11 +151,11 @@ public class CharacterController2D : MonoBehaviour
 			m_Grounded = false;
             if (InvertGravity)
             {
-                m_Rigidbody2D.AddForce(new Vector2(0f, -m_JumpForce));
+                m_Rigidbody2D.AddForce(new Vector2(0f, -m_JumpForce), ForceMode2D.Impulse);
             }
             else
             {
-                m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+                m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce), ForceMode2D.Impulse);
             }
 
 
@@ -153,16 +164,27 @@ public class CharacterController2D : MonoBehaviour
 
         if (InvertGravity)
         {
-            m_Rigidbody2D.AddForce(new Vector2(0f, negative_gravity));
-        }
-
-        if (!m_Grounded && m_Rigidbody2D.velocity.y <= 0)
-        {
-            m_Rigidbody2D.gravityScale = 2;
+            if (!m_Grounded && m_Rigidbody2D.velocity.y >= 0)
+            {
+                m_Rigidbody2D.gravityScale = -fast_fall_gravity;
+            }
+            else
+            {
+                m_Rigidbody2D.gravityScale = -1;
+            }
         }
         else
         {
-            m_Rigidbody2D.gravityScale = 1;
+            if (!m_Grounded && m_Rigidbody2D.velocity.y <= 0)
+            {
+                m_Rigidbody2D.gravityScale = fast_fall_gravity;
+            }
+            else
+            {
+                m_Rigidbody2D.gravityScale = 1;
+            }
         }
+
+
 	}
 }

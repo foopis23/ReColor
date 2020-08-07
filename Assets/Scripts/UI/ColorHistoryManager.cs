@@ -13,6 +13,7 @@ public class ColorHistoryManager : MonoBehaviour
 
     private Stack<GameObject> colorHistoryObjects;
     private RectTransform parent;
+    private int colorHistorySize;
 
 
     // Start is called before the first frame update
@@ -22,6 +23,12 @@ public class ColorHistoryManager : MonoBehaviour
         parent = GetComponent<RectTransform>();
         GameEventSystem.Current.RegisterListener<PlayerPopColorInfo>(popHandler);
         GameEventSystem.Current.RegisterListener<PlayerPushColorInfo>(pushHandler);
+    }
+
+    private void Start()
+    {
+        colorHistorySize = GameConstants.Current.getLevelData().historySize;
+        parent.sizeDelta = new Vector2((marginSize.x + squareSize.x / 2) + (colorHistorySize * squareSize.x + marginSize.x * (colorHistorySize - 1)), squareSize.y + marginSize.y * 2);
     }
 
     private void OnDestroy()

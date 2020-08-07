@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Loop Around
   ParScore: 6
+  historySize: 5

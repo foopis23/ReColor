@@ -40,6 +40,8 @@ public class Player : MonoBehaviour
 
     private ColorLaserController interactable;
 
+    private int colorHistorySize;
+
     //public getters
     public int ColorID
     {
@@ -86,23 +88,35 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        colorHistorySize = GameConstants.Current.getLevelData().historySize;
         pushColor(0);
     }
 
     private void Update()
     {
-        movement.x = Input.GetAxis("Horizontal");
-        if (Input.GetButtonDown("Jump"))
+        if (!GameConstants.Current.Paused)
         {
-            jump = true;
+            movement.x = Input.GetAxis("Horizontal");
+            if (Input.GetButtonDown("Jump"))
+            {
+                jump = true;
+            }
+
+
+            rewind = Input.GetButtonDown("Rewind");
+            interact = Input.GetButtonDown("Interact");
+
+            if (rewind)
+                popColor();
+
+            //TODO: Replace this with a real way to reset the level
+            if (Input.GetButtonDown("Reset"))
+            {
+                GameEventSystem.Current.FireEvent(new EndLevelInfo(this, SceneManager.GetActiveScene().buildIndex));
+            }
+
+            characterController.InvertGravity = (ColorID == 4);
         }
-
-
-        rewind = Input.GetButtonDown("Rewind");
-        interact = Input.GetButtonDown("Interact");
-
-        if (rewind)
-            popColor();
 
         if (interactable != null)
         {
@@ -120,18 +134,15 @@ public class Player : MonoBehaviour
             interactionDialogue.alpha = 0;
         }
 
-        //TODO: Replace this with a real way to reset the level
-        if (Input.GetButtonDown("Reset"))
-        {
-            GameEventSystem.Current.FireEvent(new EndLevelInfo(this, SceneManager.GetActiveScene().buildIndex));
-        }
-
-        characterController.InvertGravity = (ColorID == 4);
     }
 
     private void FixedUpdate() {
-        characterController.Move(movement.x * movementSpeed * Time.fixedDeltaTime, false, jump);
-        jump = false;
+
+        if (!GameConstants.Current.Paused)
+        {
+            characterController.Move(movement.x * movementSpeed * Time.fixedDeltaTime, false, jump);
+            jump = false;
+        }
     }
 
     public void colorSwapPushHandler(ColorChangerPlayerPushColorInfo info)
@@ -159,14 +170,17 @@ public class Player : MonoBehaviour
     {
         if (colorHistory.Count < 1 || colorHistory.Peek() != colorID)
         {
-            colorHistory.Push(colorID);
-            int i = colorHistory.Peek();
-            if (i < colorList.colors.Length)
+            if (colorHistory.Count + 1 <= colorHistorySize)
             {
-                sr.color = colorList.colors[i];
-            }
+                colorHistory.Push(colorID);
+                int i = colorHistory.Peek();
+                if (i < colorList.colors.Length)
+                {
+                    sr.color = colorList.colors[i];
+                }
 
-            GameEventSystem.Current.FireEvent(new PlayerPushColorInfo(this, colorID));
+                GameEventSystem.Current.FireEvent(new PlayerPushColorInfo(this, colorID));
+            }
         }
     }
 
