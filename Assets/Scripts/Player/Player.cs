@@ -30,6 +30,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private AudioClip landClip;
 
+    [SerializeField]
+    private AudioClip pushColorClip;
+
+    [SerializeField]
+    private AudioClip popColorClip;
+
 
     private AudioSource audioSource;
 
@@ -180,6 +186,10 @@ public class Player : MonoBehaviour
                 }
 
                 GameEventSystem.Current.FireEvent(new PlayerPushColorInfo(this, colorID));
+
+                audioSource.volume = 0.5f;
+                audioSource.clip = pushColorClip;
+                StartCoroutine(playAudio());
             }
         }
     }
@@ -198,6 +208,10 @@ public class Player : MonoBehaviour
 
             GameEventSystem.Current.FireEvent(new PlayerPopColorInfo(this, currentColor));
 
+            audioSource.volume = 0.5f;
+            audioSource.clip = popColorClip;
+            StartCoroutine(playAudio());
+
             return color;
         }
 
@@ -207,13 +221,26 @@ public class Player : MonoBehaviour
 
     public void handleLanding()
     {
+        Debug.Log("land");
+        audioSource.volume = 0.2f;
         audioSource.clip = landClip;
-        audioSource.Play();
+        StartCoroutine(playAudio());
     }
 
     public void handleJump()
     {
+        Debug.Log("jump");
+        audioSource.volume = 0.2f;
         audioSource.clip = jumpClip;
-        audioSource.Play();
+        StartCoroutine(playAudio());
+    }
+
+    IEnumerator playAudio()
+    {
+        if (!GameConstants.Current.Paused)
+        {
+            yield return new WaitForEndOfFrame();
+            audioSource.Play();
+        }
     }
 }

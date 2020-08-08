@@ -43,6 +43,13 @@ public class ColorHistoryManager : MonoBehaviour
     public void popHandler(PlayerPopColorInfo info)
     {
         GameObject toDestroy = colorHistoryObjects.Pop();
+        StartCoroutine(DestroyColorHistorObject(toDestroy));
+    }
+
+    IEnumerator DestroyColorHistorObject(GameObject toDestroy)
+    {
+        toDestroy.GetComponent<Animator>().SetTrigger("Pop Color");
+        yield return new WaitForSeconds(0.6f);
         Destroy(toDestroy);
     }
 
