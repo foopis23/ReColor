@@ -36,6 +36,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private AudioClip popColorClip;
 
+    [SerializeField]
+    private GameObject pauseMenu;
+
 
     private AudioSource audioSource;
 
@@ -124,6 +127,20 @@ public class Player : MonoBehaviour
             characterController.InvertGravity = (ColorID == 4);
         }
 
+        if (Input.GetButtonDown("Pause"))
+        {
+            if (pauseMenu.activeSelf)
+            {
+                pauseMenu.SetActive(false);
+                GameConstants.Current.Paused = false;
+            }
+            else
+            {
+                pauseMenu.SetActive(true);
+                GameConstants.Current.Paused = true;
+            }
+        }
+
         if (interactable != null)
         {
             interactionDialogue.alpha = 1;
@@ -185,11 +202,15 @@ public class Player : MonoBehaviour
                     sr.color = colorList.colors[i];
                 }
 
-                GameEventSystem.Current.FireEvent(new PlayerPushColorInfo(this, colorID));
+                if (!GameConstants.Current.Paused)
+                {
+                    GameEventSystem.Current.FireEvent(new PlayerPushColorInfo(this, colorID));
 
-                audioSource.volume = 0.7f;
-                audioSource.clip = pushColorClip;
-                StartCoroutine(playAudio());
+                    audioSource.volume = 0.7f;
+                    audioSource.clip = pushColorClip;
+                    StartCoroutine(playAudio());
+                }
+
             }
         }
     }

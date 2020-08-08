@@ -56,6 +56,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ea2965f2dceca4e963257825f25df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Paused: 0
   colorList: {fileID: 11400000, guid: 1d8526bcb101f1945874384b79389286, type: 2}
   levelDataList: {fileID: 11400000, guid: 92571c06f5f3a674eb73d2d3635df740, type: 2}
-  buildIndexOffset: 0
+  buildIndexOffset: 1

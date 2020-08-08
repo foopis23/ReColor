@@ -470,7 +470,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
 --- !u!114 &2490685968268825049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,6 +489,7 @@ MonoBehaviour:
   landClip: {fileID: 8300000, guid: f335106a090467449b7f283faecb29d4, type: 3}
   pushColorClip: {fileID: 8300000, guid: cb1d1b55c294b3445b78b9a4ecfe0487, type: 3}
   popColorClip: {fileID: 8300000, guid: d5e3e7a998616d647b6949021f0822cd, type: 3}
+  pauseMenu: {fileID: 0}
 --- !u!212 &2490685968268825028
 SpriteRenderer:
   m_ObjectHideFlags: 0

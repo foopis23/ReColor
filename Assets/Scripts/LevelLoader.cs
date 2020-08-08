@@ -17,7 +17,11 @@ public class LevelLoader : MonoBehaviour
     {
 
         StartCoroutine(StartLevel());
-        levelTitle.text = GameConstants.Current.getLevelData().Name;
+        LevelData data = GameConstants.Current.getLevelData();
+
+        if (data != null)
+            levelTitle.text = data.Name;
+
         sceneID = SceneManager.GetActiveScene().buildIndex;
 
         animator = GetComponent<Animator>();
@@ -35,15 +39,15 @@ public class LevelLoader : MonoBehaviour
 
     public void HandleLevelEnd(EndLevelInfo info)
     {
-        if (info.GoToScene == -1)
+        int GoToScene = (info.GoToScene < 0) ? sceneID + 1 : info.GoToScene;
+
+        //should be scene count but didn't work for me so hardcoded
+        if (GoToScene > 9)
         {
-            StartCoroutine(LoadLevel(sceneID + 1));
-        }
-        else
-        {
-            StartCoroutine(LoadLevel(info.GoToScene));
+            GoToScene = 0;
         }
 
+        StartCoroutine(LoadLevel(GoToScene));
     }
 
     IEnumerator StartLevel()
