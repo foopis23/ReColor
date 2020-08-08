@@ -187,7 +187,7 @@ public class Player : MonoBehaviour
 
                 GameEventSystem.Current.FireEvent(new PlayerPushColorInfo(this, colorID));
 
-                audioSource.volume = 0.5f;
+                audioSource.volume = 0.7f;
                 audioSource.clip = pushColorClip;
                 StartCoroutine(playAudio());
             }
@@ -208,7 +208,7 @@ public class Player : MonoBehaviour
 
             GameEventSystem.Current.FireEvent(new PlayerPopColorInfo(this, currentColor));
 
-            audioSource.volume = 0.5f;
+            audioSource.volume = 0.7f;
             audioSource.clip = popColorClip;
             StartCoroutine(playAudio());
 
@@ -222,7 +222,7 @@ public class Player : MonoBehaviour
     public void handleLanding()
     {
         Debug.Log("land");
-        audioSource.volume = 0.2f;
+        audioSource.volume = 0.5f;
         audioSource.clip = landClip;
         StartCoroutine(playAudio());
     }
@@ -230,7 +230,7 @@ public class Player : MonoBehaviour
     public void handleJump()
     {
         Debug.Log("jump");
-        audioSource.volume = 0.2f;
+        audioSource.volume = 0.5f;
         audioSource.clip = jumpClip;
         StartCoroutine(playAudio());
     }
