@@ -164,7 +164,7 @@ public class CharacterController2D : MonoBehaviour
 
         if (InvertGravity)
         {
-            if (!m_Grounded && m_Rigidbody2D.velocity.y >= 0)
+            if (!m_Grounded && m_Rigidbody2D.velocity.y >= -4)
             {
                 m_Rigidbody2D.gravityScale = -fast_fall_gravity;
             }
@@ -175,7 +175,7 @@ public class CharacterController2D : MonoBehaviour
         }
         else
         {
-            if (!m_Grounded && m_Rigidbody2D.velocity.y <= 0)
+            if (!m_Grounded && m_Rigidbody2D.velocity.y <= 4)
             {
                 m_Rigidbody2D.gravityScale = fast_fall_gravity;
             }
